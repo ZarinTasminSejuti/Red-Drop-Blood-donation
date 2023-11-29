@@ -14,7 +14,7 @@ const Navbar = () => {
       </li>
     
         <li>
-          <Link to="/">Dashboard</Link>
+          <Link to="/dashboard">Dashboard</Link>
         </li>
         <li>
           <Link to="/">Funding</Link>
@@ -30,7 +30,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="w-full fixed z-40 bg-opacity-60 bg-black text-white  ">
+    <div className="w-full fixed z-40 bg-opacity-60 bg-black text-white">
       <div className="mx-auto max-w-screen-xl navbar">
         <div className="navbar-start">
           <div className="dropdown">

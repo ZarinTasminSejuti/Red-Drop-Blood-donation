@@ -40,11 +40,11 @@ const Contact = () => {
   };
 
   return (
-    <div className="bg-cover" style={{
+    <div className="bg-cover mt-72" style={{
       backgroundImage: "url(https://i.ibb.co/zGngFFp/contact-us-xxxl.png)",
     }}>
       <div
-        className="max-w-screen-xl mx-auto flex justify-between py-20 text-center  h-[150px]  items-center mb-16 lg:mb-[380px] my-60"
+        className="max-w-screen-xl mx-auto flex justify-between py-20 text-center  h-[150px]  items-center mb-16 lg:mb-[380px]"
         
       >
         <div className="">
