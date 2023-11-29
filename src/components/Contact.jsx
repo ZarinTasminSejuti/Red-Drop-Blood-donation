@@ -40,20 +40,30 @@ const Contact = () => {
   };
 
   return (
-      <div className="my-24 bg-black">
-           <div className="lg:relative">
+    <div className="bg-cover" style={{
+      backgroundImage: "url(https://i.ibb.co/zGngFFp/contact-us-xxxl.png)",
+    }}>
       <div
-        className="flex justify-between p-20 text-center bg-cover h-[400px]  items-center mb-16 lg:mb-[380px]"
-        style={{
-          backgroundImage: "url(https://i.ibb.co/zGngFFp/contact-us-xxxl.png)",
-        }}
-      ></div>
+        className="max-w-screen-xl mx-auto flex justify-between py-20 text-center  h-[150px]  items-center mb-16 lg:mb-[380px] my-60"
+        
+      >
+        <div className="">
+          <p className="text-7xl text-white font-semibold">Contact us</p>
+        </div>
+     
+
+      
+
+
+
+
+
 
       {/* contact us field  */}
-      <div className="text-center py-24 w-full lg:w-1/2 p-10 mb-10 lg:mb-0 lg:p-20 shadow-md rounded text-white bg-slate-50 lg:absolute top-0 lg:top-[620px] left-0 lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:-translate-y-1/2 ">
+      <div className="text-center w-full lg:w-1/2 mb-10 lg:mb-0 lg:p-20 rounded text-white bg-slate-50 top-0 right-0 shadow-md">
         <form onSubmit={handleContact}>
           {/* <header className="footer-title text-slate-100">Any Suggestion</header> */}
-          <fieldset className="form-control w-80">
+          <fieldset className="form-control ">
             <label className="label">
               <span className="label-text">Name</span>
             </label>
@@ -67,7 +77,7 @@ const Contact = () => {
             </div>
           </fieldset>
 
-          <fieldset className="form-control w-80">
+          <fieldset className="form-control">
             <label className="label">
               <span className="label-text">Email</span>
             </label>
@@ -81,7 +91,7 @@ const Contact = () => {
             </div>
           </fieldset>
 
-          <fieldset className="form-control w-80">
+          <fieldset className="form-control">
             <label className="label">
               <span className="label-text">Your Message</span>
             </label>
@@ -93,14 +103,15 @@ const Contact = () => {
                 className="input input-bordered w-full resize-y h-28 bg-slate-100 text-black"
               ></textarea>
             </label>
-            <button className="py-3 rounded-lg text-white hover:text-white bg-gradient-to-r from-red-600 to-red-500 hover:bg-gradient-to-l hover:from-red-600 hover:to-red-500">
+            <button className="py-3 mt-4 rounded-lg text-white hover:text-white bg-gradient-to-r from-red-600 to-red-500 hover:bg-gradient-to-l hover:from-red-600 hover:to-red-500">
               Send now
             </button>
           </fieldset>
         </form>
       </div>
-    </div>
-   </div>
+      </div>
+      
+      </div>
   );
 };
 

@@ -75,52 +75,38 @@ const Register = () => {
             onSubmit={handleRegister}
           >
             
-            <input
-              label="Full Name"
-             
-              color="primary"
-              type="text"
-              placeholder="Enter your name..."
-              name="name"
-              required
-            
-            />
+            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Your Name *</span>
+                                </label>
+                                <input type="text" placeholder="Enter your name..." name="name" className="input input-bordered" required />
+                            </div>
 
-            <input
-              label="Profile Photo URL"
-           
-              color="primary"
-              type="text"
-              placeholder="Enter photo url..."
-              name="photo"
-              required
-              
-            />
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Profile Photo URL</span>
+                                </label>
+                                <input type="text" placeholder="Enter photo url..." name="photo" className="input input-bordered" required />
+                                </div>
+                                
 
-            <input
-              label="Email"
-            
-              color="primary"
-              type="text"
-              placeholder="Enter your email address..."
-              name="email"
-              required
-         
-            />
+                                <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Email *</span>
+                                </label>
+                                <input type="email" placeholder="Enter your email address..." name="email" className="input input-bordered" required />
+                            </div>
 
-            <input
-              label="Password"
-             
-              color="primary"
-              type="password"
-              placeholder="Enter your password..."
-              name="password"
-              required
-            
-            />
-            <div className="mt-8 text-center">
-              <button className="bg-gradient-to-r from-blue-600 to-cyan-500 hover:bg-gradient-to-l hover:from-blue-600 hover:to-cyan-500" type="submit">Register</button>
-            </div>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Password *</span>
+                                </label>
+                                <input type="password" placeholder="Enter new password..." className="input input-bordered" name="password" required />
+
+                            </div>
+                            <div className="form-control mt-6">
+                                <button className="btn text-white border-none bg-red-600 hover:text-white hover:bg-red-700" type="submit">Register</button>
+                            </div>
           </form>
 
           <p className="mt-7 text-center">

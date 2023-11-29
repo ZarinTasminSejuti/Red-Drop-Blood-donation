@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
+import { FaGoogle } from "react-icons/fa";
 
 const Login = () => {
   const { signIn, signInGoogle } = useContext(AuthContext);
@@ -52,39 +53,51 @@ const handleGoogle = () => {
       <div className="text-center">
         <h1 className="text-5xl text-blue-600 font-bold">Login now!</h1>
         <p className="py-2 my-4 text-black font-medium px-4 rounded-xl">
-          Please log in to access your account and explore our services.
+          Please log in to access your account and explore our donation services.
         </p>
       </div>
 
       <div className=" w-full max-w-sm mx-auto p-7 shadow-xl bg-base-100">
-        <form onSubmit={handleLogin} className="space-y-4 w-full">
-          <input
-            label="Email"
-           
-            color="primary"
-            type="text"
-            placeholder="Enter your email address..."
-            name="email"
-            required
-           
-          />
+              <form onSubmit={handleLogin} className="space-y-4 w-full">
+                  
+
+              <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">Email</span>
+                  </label>
+
+                  {/* email  */}
+                  <input
+                    type="email"
+                    placeholder="Enter your email..."
+                    className="input input-bordered"
+                    name="email"
+                    required
+                  />
+                </div>
+         
 
           {/* password  */}
-          <input
-            className=""
-            label="Password"
-          
-            color="primary"
-            type="password"
-            placeholder="Enter your password..."
-            name="password"
-            required
-            
-          />
+          <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">Password</span>
+                  </label>
+
+                  <input
+                    type="password"
+                    placeholder="Enter your password..."
+                    className="input input-bordered"
+                    name="password"
+                    required
+                  />
+                </div>
 
           {/* login button */}
           <div className=" text-center">
-            <button className="bg-gradient-to-r from-blue-600 to-cyan-500 hover:bg-gradient-to-l hover:from-blue-600 hover:to-cyan-500" type="submit">Login</button>
+                   
+                      <button className="btn text-white bg-blue-700 hover:bg-red-600  hover:text-white " type="submit">
+                    Login
+                  </button>
           </div>
         </form>
 
@@ -92,19 +105,18 @@ const handleGoogle = () => {
 
         {/* google button */}
         <p className="text-center my-2">
-          {" "}
-          <button
-            onClick={handleGoogle}
-           
-           
-          >
-            {/* <GoogleIcon></GoogleIcon>Google */}
-          </button>
-        </p>
+                {" "}
+                <button
+                  onClick={handleGoogle}
+                  className="btn w-1/2 text-white border-none bg-red-600 hover:bg-blue-700"
+                >
+                  <FaGoogle></FaGoogle>Google
+                </button>
+              </p>
 
         <p className="text-center">
           Do not have an account?{" "}
-          <Link to="/registration" className="text-red-600 font-semibold">
+          <Link to="/registration" className="text-blue-700 font-semibold">
             Register here
           </Link>
         </p>
