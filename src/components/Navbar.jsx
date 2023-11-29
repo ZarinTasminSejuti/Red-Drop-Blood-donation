@@ -21,10 +21,10 @@ const Navbar = () => {
         </li>
 
         <li>
-        <Link to="/">Login</Link>
+        <Link to="/login">Login</Link>
       </li>
       <li>
-        <Link to="/">Registration</Link>
+        <Link to="/registration">Registration</Link>
       </li>
     </>
   );
