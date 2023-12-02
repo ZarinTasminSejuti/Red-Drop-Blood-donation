@@ -1,12 +1,15 @@
 import { createBrowserRouter } from "react-router-dom";
+import Dashboard from "../layout/Dashboard";
 import MainLayout from "../layout/MainLayout";
 import Blog from "../pages/Blog";
-import Dashboard_Profile from "../components/Dashboard_Profile";
-
+import DonorHome from "../pages/Dashboard/DonorHome";
+import Profile from "../pages/Dashboard/Profile";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Registration from "../pages/Registration";
-import Dashboard from "../pages/Dashboard";
+import PrivateRoute from "../PrivateRoute";
+
+
 
 
 const router = createBrowserRouter([
@@ -17,14 +20,6 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-      },
-      {
-        path: "/dashboard/profile",
-        element: <Dashboard_Profile></Dashboard_Profile>,
-      },
-      {
-        path: "/dashboard",
-        element: <Dashboard></Dashboard>,
       },
       {
         path: "/login",
@@ -38,6 +33,21 @@ const router = createBrowserRouter([
         path: "/blog",
         element: <Blog></Blog>,
         loader: () => fetch("http://localhost:5000/blog"),
+      },
+     
+    ],
+  },
+  {
+    path: "dashboard",
+    element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+    children: [
+      {
+        path: "profile",
+        element: <Profile></Profile>,
+      },
+      {
+        path: "donorHome",
+        element: <DonorHome></DonorHome>,
       },
      
     ],

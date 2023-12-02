@@ -6,7 +6,7 @@ import { useState } from "react";
 
 const Blog = () => {
   const blogCollection = useLoaderData();
-  console.log(blogCollection);
+ 
 
   const [searchText, setSearchText] = useState("");
   const [filteredBlog, setFilteredBlog] = useState(blogCollection);
