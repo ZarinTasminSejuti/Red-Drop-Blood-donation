@@ -3,9 +3,11 @@ import swal from "sweetalert";
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import { FaGoogle } from "react-icons/fa";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 const Login = () => {
   const { signIn, signInGoogle } = useContext(AuthContext);
+  const axiosPublic = useAxiosPublic();
 
   const navigate = useNavigate();
 
@@ -34,9 +36,18 @@ const Login = () => {
 
 const handleGoogle = () => {
   signInGoogle()
-    .then(() => {
-      swal("You're logged in!", "Login Successful!", "success");
+    .then(result => {
+      const userInfo = {
+        email: result.user?.email,
+        name: result.user?.displayName
+      }
+      axiosPublic.post('/users', userInfo)
+        .then(res => {
+          console.log(res.data);
+          swal("You're logged in!", "Login Successful!", "success");
       navigate("/");
+      })
+      
     })
     .catch((error) => {
       console.log(error);

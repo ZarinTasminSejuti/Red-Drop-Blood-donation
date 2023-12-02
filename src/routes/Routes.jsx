@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Dashboard from "../layout/Dashboard";
 import MainLayout from "../layout/MainLayout";
 import Blog from "../pages/Blog";
+import AllUsers from "../pages/Dashboard/All Users/AllUsers";
 import DonorHome from "../pages/Dashboard/DonorHome";
 import Profile from "../pages/Dashboard/Profile";
 import Home from "../pages/Home";
@@ -45,10 +46,20 @@ const router = createBrowserRouter([
         path: "profile",
         element: <Profile></Profile>,
       },
+
+      //admin routes
+      {
+        path: "allUsers",
+        element: <AllUsers></AllUsers>,
+      },
+
+
+      //Donor Routes
       {
         path: "donorHome",
         element: <DonorHome></DonorHome>,
       },
+     
      
     ],
   },

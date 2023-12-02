@@ -44,12 +44,22 @@ const AuthProvider = ({ children }) => {
     //Update Name after register
     //As per firebase doc user logged in when register complete
     //So updateProfile method need to use to update displayName
-    updateProfile(auth.currentUser, nameAndPhoto)
+    // updateProfile(auth.currentUser, nameAndPhoto)
         
-        .then()
-        .catch((error) => {
-            console.error(error);
-          });
+    //     .then()
+    //     .catch((error) => {
+    //         console.error(error);
+    //       });
+
+    useEffect(() => {
+        if (user) {
+          updateProfile(auth.currentUser, nameAndPhoto)
+            .then(() => {})
+            .catch((error) => {
+              console.error(error);
+            });
+        }
+      }, [user, nameAndPhoto]);
     
     
     //log out authentication

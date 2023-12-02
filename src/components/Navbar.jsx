@@ -1,6 +1,31 @@
-import { Link } from "react-router-dom";
+
+import { useContext} from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProvider";
+import swal from "sweetalert";
 
 const Navbar = () => {
+
+ //navigate after logout
+ const navigate = useNavigate();
+
+ const { logOut,user,userDetails } = useContext(AuthContext);
+
+
+ const handleLogOut = () => {
+   logOut()
+     .then(() => {
+       swal("Logged Out successfully");
+       navigate("/");
+     })
+     .catch((error) => {
+       console.error(error);
+     });
+ };
+
+
+
+
   const navOptions = (
     <>
       <li>
@@ -18,12 +43,7 @@ const Navbar = () => {
         <li>
           <Link to="/dashboard/profile">Dashboard</Link>
         </li>
-        <li>
-        <Link to="/login">Login</Link>
-      </li>
-      <li>
-        <Link to="/registration">Registration</Link>
-      </li>
+    
     </>
   );
 
@@ -65,7 +85,47 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{navOptions}</ul>
         </div>
-      </div>
+
+
+
+      
+
+
+      <div className="lg:w-1/2 flex flex-row justify-end text-white p-2 gap-2">
+       {user ? (
+         <>
+           <img
+             src={userDetails.photoURL}
+             alt={userDetails.displayName}
+             className="w-10 rounded "
+           />
+
+           <span className="text-white">{userDetails.displayName}</span>
+           <button
+             className="btn btn-ghost text-white hover:text-white hover:bg-red-600"
+             onClick={handleLogOut}
+           >
+             Log Out
+           </button>
+         </>
+       ) : (
+         <>
+              <Link to="/login">
+                <button className="btn btn-ghost text-white hover:text-white hover:bg-black">
+                  Login
+                </button>
+              </Link>
+              <Link to="/registration">
+                <button className="btn text-white btn-ghost hover:bg-black hover:text-white">
+                  Register
+                </button>
+              </Link>
+             </>
+          )}  
+      
+         
+        </div> 
+        </div>
     </div>
   );
 };
