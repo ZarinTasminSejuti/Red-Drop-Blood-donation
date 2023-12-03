@@ -18,6 +18,8 @@ const Login = () => {
     const email = form.get("email");
     const password = form.get("password");
 
+  
+   
     signIn(email, password)
     .then(() => {
       swal("You're logged in!", "Login Successful!", "success");
@@ -34,13 +36,18 @@ const Login = () => {
 };
 
 
-const handleGoogle = () => {
+  const handleGoogle = () => {
+
   signInGoogle()
-    .then(result => {
+    .then((result) => {
       const userInfo = {
-        email: result.user?.email,
-        name: result.user?.displayName
+        email: result._tokenResponse?.email,
+        displayName: result._tokenResponse?.displayName,
+        image: result._tokenResponse?.photoUrl,
+        status: "active",
+        role: "donor",
       }
+      console.log(result);
       axiosPublic.post('/users', userInfo)
         .then(res => {
           console.log(res.data);

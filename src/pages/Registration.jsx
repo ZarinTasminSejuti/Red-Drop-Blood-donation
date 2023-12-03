@@ -26,6 +26,9 @@ const Register = () => {
     const nameAndEmail = {
       displayName: name,
       email: email,
+      image: photo,
+      status: "active",
+      role: "donor"
     };
 
     //checking password validation
