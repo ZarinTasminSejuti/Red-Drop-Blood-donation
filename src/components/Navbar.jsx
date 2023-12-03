@@ -41,7 +41,7 @@ const Navbar = () => {
           <Link to="/">Funding</Link>
         </li>
         <li>
-          <Link to="/dashboard/profile">Dashboard</Link>
+          <Link to="/dashboard">Dashboard</Link>
         </li>
     
     </>

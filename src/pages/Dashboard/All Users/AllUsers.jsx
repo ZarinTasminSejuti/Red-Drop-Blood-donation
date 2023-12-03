@@ -5,12 +5,15 @@ import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
+import { useState } from "react";
 
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
+  const [somethingHappend, setSomethingHappend] = useState(true);
+
   const { data: users = [] } = useQuery({
-    queryKey: ["allUsers"],
+    queryKey: ["allUsers", somethingHappend],
     queryFn: async () => {
       const res = await axiosSecure.get("/allUsers");
       return res.data;
@@ -30,23 +33,136 @@ const AllUsers = () => {
       .then((data) => {
         if (data.deletedCount > 0) {
           swal("Deleted!", "User has been deleted.", "success");
+          setSomethingHappend(!somethingHappend);
           navigate("/dashboard/allUsers");
         }
       });
   };
 
   //Handle Block button
-  //     const handleEdit = (itemId) => { };
+  //const handleEdit = (itemId) => {};
 
-  //   //Handle Block button
-  //   const handleMAdmin = (itemId) => {};
+  //Handle MAdmin button
+  const handleMAdmin = (user) => {
+    const newUserInfo = {
+      status: user.status,
+      role: "admin",
+    };
 
-  //   //Handle Block button
-  //   const handleMVol = (itemId) => {};
-  //   //Handle Block button
-  //   const handleBlock = (itemId) => {};
-  //   //Handle Block button
-  //   const handleUnBlock = (itemId) => {};
+    fetch(`http://localhost:5000/updateUserInfo/${user._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newUserInfo),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          swal("User Role Updated!", "Now You are Admin!", "success");
+          setSomethingHappend(!somethingHappend);
+          navigate("/dashboard/allUsers");
+        }
+      });
+  };
+
+
+  //Handle Block button
+  const handleMVol = (user) => {
+    const newUserInfo = {
+      status: user.status,
+      role: "volunteer",
+    };
+
+    fetch(`http://localhost:5000/updateUserInfo/${user._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newUserInfo),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          swal("User Role Updated!", "Now You are Admin!", "success");
+          setSomethingHappend(!somethingHappend);
+          navigate("/dashboard/allUsers");
+        }
+      });
+  };
+
+
+  //Handle MDonor button
+  const handleMDonor = (user) => {
+    const newUserInfo = {
+      status: user.status,
+      role: "donor",
+    };
+
+    fetch(`http://localhost:5000/updateUserInfo/${user._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newUserInfo),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          swal("User Role Updated!", "Now You are Admin!", "success");
+          setSomethingHappend(!somethingHappend);
+          navigate("/dashboard/allUsers");
+        }
+      });
+  };
+    //Handle Block button
+  const handleBlock = (user) => {
+    const newUserInfo = {
+      status: "block",
+      role: user.role,
+    };
+
+    fetch(`http://localhost:5000/updateUserInfo/${user._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newUserInfo),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          swal("User Role Updated!", "Now You are Admin!", "success");
+          setSomethingHappend(!somethingHappend);
+          navigate("/dashboard/allUsers");
+        }
+      });
+  };
+
+
+    //Handle Active button
+  const handleActive = (user) => {
+    const newUserInfo = {
+      status: "active",
+      role: user.role,
+    };
+
+    fetch(`http://localhost:5000/updateUserInfo/${user._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newUserInfo),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          swal("User Role Updated!", "Now You are Admin!", "success");
+          setSomethingHappend(!somethingHappend);
+          navigate("/dashboard/allUsers");
+        }
+      });
+  };
 
   return (
     <div>
@@ -160,28 +276,25 @@ const AllUsers = () => {
                           className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
                         >
                           <li>
-                            <a onClick={() => handleMAdmin(user._id)}>
-                              Make Admin
-                            </a>
+                            <a onClick={() => handleMAdmin(user)}>Make Admin</a>
                           </li>
+                          
                           <li>
-                            <a onClick={() => handleMVol(user._id)}>
+                            <a onClick={() => handleMVol(user)}>
                               Make Volunteer
                             </a>
                           </li>
                           <li>
-                            <a onClick={() => handleMDonor(user._id)}>
-                              Make Donor
-                            </a>
+                            <a onClick={() => handleMDonor(user)}>Make Donor</a>
                           </li>
                           <li>
-                            <a onClick={() => handleBlock(user._id)}>Block</a>
+                            <a onClick={() => handleBlock(user)}>Block</a>
                           </li>
                           <li>
-                            <a onClick={() => handleUnBlock(user._id)}>
-                              UnBlock
+                            <a onClick={() => handleActive(user)}>
+                              Active
                             </a>
-                          </li> 
+                          </li>
                         </ul>
                       </div>
                     </div>

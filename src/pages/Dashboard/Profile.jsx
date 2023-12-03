@@ -1,6 +1,29 @@
 //import swal from "sweetalert";
+import { AuthContext } from "../../providers/AuthProvider";
+import { useContext } from "react";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useQuery } from "react-query";
 
 const Profile = () => {
+  const { userDetails } = useContext(AuthContext);
+  
+  const axiosSecure = useAxiosSecure();
+
+  const { data: users = [] } = useQuery({
+    queryKey: ["allUsers"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/allUsers");
+      return res.data;
+    },
+  });
+
+  const usersFilter = users.filter(
+    (user) =>
+    userDetails.email === user.email
+  );
+
+
+
     return (
       <div className="max-w-screen-xl mx-auto px-28 pt-10">
         
@@ -17,17 +40,19 @@ const Profile = () => {
           <div className=" w-3/4 py-5 px-10 leading-10 bg-white shadow-md rounded-xl flex flex-row justify-between items-center">
             <div>
               <h2>
-                Name: <span className="text-xl font-semibold">Mahadi Hassan</span>
+                Name: <span className="text-xl font-semibold">{usersFilter[0].displayName}</span>
               </h2>
-              <p>Address: Dhaka</p>
-              <p>Blood Group: O+</p>
-              <p>Email: mahadi.eete@gmail.com</p>
+              <p>Address: {usersFilter[0].district}, {usersFilter[0].upazila}</p>
+              <p>Blood Group: {usersFilter[0].bloodGroup}</p>
+              <p>Email: {usersFilter[0].email}</p>
+              
             </div>
             <img
-              src="https://pbs.twimg.com/media/EanqDy8U0AUEl-u?format=jpg&name=large"
-              alt="user"
+              src={usersFilter[0].image}
+              alt="photo"
               className="w-[120px] h-[120px] rounded-full ring-4 ring-blue-500 ring-offset-white ring-offset-4"
             />
+           
           </div>
         </div>
       </div>

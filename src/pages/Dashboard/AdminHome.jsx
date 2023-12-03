@@ -1,3 +1,4 @@
+import Profile from "./Profile";
 
 
 const AdminHome = () => {
@@ -6,6 +7,7 @@ const AdminHome = () => {
         <div>
             <div>
                 <h2 className="text-3xl">Welcome! </h2>
+                <Profile></Profile>
             </div>
         </div>
     );

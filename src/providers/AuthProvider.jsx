@@ -59,7 +59,23 @@ const AuthProvider = ({ children }) => {
               console.error(error);
             });
         }
-      }, [user, nameAndPhoto]);
+    }, [user, nameAndPhoto]);
+    
+
+    // useEffect(() => {
+    //     if (user) {
+    //         updateProfile(auth.currentUser, nameAndPhoto)
+    //             .then(() => {
+                    
+    //                 return auth.currentUser.getIdToken();
+    //             })
+                
+    //             .catch((error) => {
+    //                 console.error(error);
+    //             });
+    //     }
+    // }, [user, nameAndPhoto]);
+    
     
     
     //log out authentication

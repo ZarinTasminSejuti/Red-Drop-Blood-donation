@@ -1,15 +1,38 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import swal from "sweetalert";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 
-
 const Register = () => {
   const { signUp, logOut, setNameAndPhoto } = useContext(AuthContext);
   const axiosPublic = useAxiosPublic();
+  const [district, setDistrict] = useState([]);
+  const [upazila, setUpazila] = useState([]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [districtResponse, upazilaResponse] = await Promise.all([
+          fetch("http://localhost:5000/district").then((response) =>
+            response.json()
+          ),
+          fetch("http://localhost:5000/upazila").then((response) =>
+            response.json()
+          ),
+        ]);
 
+        setDistrict(districtResponse);
+        setUpazila(upazilaResponse);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const bloodGroup = ["A+", "A-", "B+", "B-", "AB+", "AB-", " O+", "O-"];
   //navigate after login
   const navigate = useNavigate();
 
@@ -22,13 +45,19 @@ const Register = () => {
     const photo = form.get("photo");
     const email = form.get("email");
     const password = form.get("password");
+    const bloodGroup = form.get("bloodGroup");
+    const district = form.get("district");
+    const upazila = form.get("upazila");
 
     const nameAndEmail = {
       displayName: name,
       email: email,
       image: photo,
+      bloodGroup: bloodGroup,
+      district: district,
+      upazila: upazila,
       status: "active",
-      role: "donor"
+      role: "donor",
     };
 
     //checking password validation
@@ -47,14 +76,13 @@ const Register = () => {
     signUp(email, password)
       .then(() => {
         //create user entry in the database
-        axiosPublic.post('/users', nameAndEmail)
-        .then(res => {
-            if (res.data.insertedId) {
-                console.log("user added to db");
-                // reset();
-                swal("You're registered!", "Registration Successful!", "success");
-        }
-    })
+        axiosPublic.post("/users", nameAndEmail).then((res) => {
+          if (res.data.insertedId) {
+            console.log("user added to db");
+            // reset();
+            swal("You're registered!", "Registration Successful!", "success");
+          }
+        });
 
         logOut()
           .then(() => {
@@ -75,7 +103,6 @@ const Register = () => {
       displayName: name,
       photoURL: photo,
     });
-    
   };
 
   return (
@@ -89,44 +116,133 @@ const Register = () => {
         </div>
 
         <div className="rounded-lg w-full mx-auto max-w-sm p-7 shadow-xl bg-base-100">
-          <form
-           
-            className="space-y-4 w-full"
-            onSubmit={handleRegister}
-          >
-            
+          <form className="space-y-4 w-full" onSubmit={handleRegister}>
             <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Your Name *</span>
-                                </label>
-                                <input type="text" placeholder="Enter your name..." name="name" className="input input-bordered" required />
-                            </div>
+              <label className="label">
+                <span className="label-text">Your Name *</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Enter your name..."
+                name="name"
+                className="input input-bordered"
+                required
+              />
+            </div>
 
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Profile Photo URL</span>
-                                </label>
-                                <input type="text" placeholder="Enter photo url..." name="photo" className="input input-bordered" required />
-                                </div>
-                                
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Profile Photo URL</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Enter photo url..."
+                name="photo"
+                className="input input-bordered"
+                required
+              />
+            </div>
 
-                                <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Email *</span>
-                                </label>
-                                <input type="email" placeholder="Enter your email address..." name="email" className="input input-bordered" required />
-                            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Email *</span>
+              </label>
+              <input
+                type="email"
+                placeholder="Enter your email address..."
+                name="email"
+                className="input input-bordered"
+                required
+              />
+            </div>
 
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Password *</span>
-                                </label>
-                                <input type="password" placeholder="Enter new password..." className="input input-bordered" name="password" required />
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Password *</span>
+              </label>
+              <input
+                type="password"
+                placeholder="Enter new password..."
+                className="input input-bordered"
+                name="password"
+                required
+              />
+            </div>
 
-                            </div>
-                            <div className="form-control mt-6">
-                                <button className="btn text-white border-none bg-red-600 hover:text-white hover:bg-red-700" type="submit">Register</button>
-                            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Blood Group</span>
+              </label>
+              <label>
+                <select
+                  name="bloodGroup"
+                  id="select"
+                  className="select bg-white input-bordered rounded-md w-full"
+                >
+                  <option disabled>Select your blood group...</option>
+                  {bloodGroup.map((bloodType) => {
+                    return (
+                      <option key={bloodType} value={bloodType}>
+                        {bloodType}
+                      </option>
+                    );
+                  })}
+                </select>
+              </label>
+            </div>
+
+            <div className="form-control ">
+              <label className="label">
+                <span className="label-text">District</span>
+              </label>
+              <label>
+                <select
+                  name="district"
+                  id="select1"
+                  className="select bg-white input-bordered rounded-md w-full"
+                >
+                  <option disabled>Select your district...</option>
+                  {district[0]?.data.map((district, index) => {
+                    return (
+                      <option key={index} value={district.name}>
+                        {district.name}
+                      </option>
+                    );
+                  })}
+                </select>
+              </label>
+            </div>
+
+            <div className="form-control ">
+              <label className="label">
+                <span className="label-text">Upazila</span>
+              </label>
+              <label>
+                <select
+                  name="upazila"
+                  id="select111"
+                  className="select bg-white input-bordered rounded-md w-full"
+                >
+                  <option disabled>Select your upazila...</option>
+                  {upazila[0]?.data.map((upazila, index) => {
+                    return (
+                      <option key={index} value={upazila.name}>
+                        {upazila.name}
+                      </option>
+                    );
+                  })}
+                </select>
+              </label>
+            </div>
+
+            <div className="form-control mt-6">
+              <button
+                className="btn text-white border-none bg-red-600 hover:text-white hover:bg-red-700"
+                type="submit"
+              >
+                Register
+              </button>
+            </div>
           </form>
 
           <p className="mt-7 text-center">
