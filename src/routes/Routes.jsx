@@ -1,10 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
+import CreateDonation from "../components/CreateDonation";
 import Dashboard from "../layout/Dashboard";
 import MainLayout from "../layout/MainLayout";
 import Blog from "../pages/Blog";
+import AddBlog from "../pages/Dashboard/AddBlog";
 import AdminHome from "../pages/Dashboard/AdminHome";
 import AllUsers from "../pages/Dashboard/All Users/AllUsers";
+import ContentManagement from "../pages/Dashboard/ContentManagement";
 import DonorHome from "../pages/Dashboard/DonorHome";
+import VolunteerHome from "../pages/Dashboard/VolunteerHome";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Registration from "../pages/Registration";
@@ -21,6 +25,11 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+      },
+      {
+        path: "/createDonation",
+        element: <CreateDonation></CreateDonation>,
+        
       },
       {
         path: "/login",
@@ -42,12 +51,20 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
     children: [
+      
+//admin routes
       {
         path: "adminHome",
         element: <AdminHome></AdminHome>,
       },
-
-      //admin routes
+      {
+        path: "contentManagement",
+        element: <ContentManagement></ContentManagement>,
+      },
+      {
+        path: "contentManagement/addBlog",
+        element: <AddBlog></AddBlog>,
+      },
       {
         path: "allUsers",
         element: <AllUsers></AllUsers>,
@@ -60,7 +77,12 @@ const router = createBrowserRouter([
         path: "donorHome",
         element: <DonorHome></DonorHome>,
       },
-     
+      
+      {
+        path: "volunteerHome",
+        element: <VolunteerHome></VolunteerHome>,
+      },
+      
      
     ],
   },

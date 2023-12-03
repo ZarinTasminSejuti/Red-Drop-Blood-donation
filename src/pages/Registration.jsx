@@ -178,6 +178,7 @@ const Register = () => {
                   name="bloodGroup"
                   id="select"
                   className="select bg-white input-bordered rounded-md w-full"
+                  required
                 >
                   <option disabled>Select your blood group...</option>
                   {bloodGroup.map((bloodType) => {
@@ -200,6 +201,7 @@ const Register = () => {
                   name="district"
                   id="select1"
                   className="select bg-white input-bordered rounded-md w-full"
+                  required
                 >
                   <option disabled>Select your district...</option>
                   {district[0]?.data.map((district, index) => {
@@ -222,6 +224,7 @@ const Register = () => {
                   name="upazila"
                   id="select111"
                   className="select bg-white input-bordered rounded-md w-full"
+                  required
                 >
                   <option disabled>Select your upazila...</option>
                   {upazila[0]?.data.map((upazila, index) => {

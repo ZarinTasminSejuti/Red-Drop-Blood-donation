@@ -5,11 +5,14 @@ import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../../providers/AuthProvider";
 
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure();
+  const { userDetails } = useContext(AuthContext);
   const navigate = useNavigate();
+
   const [somethingHappend, setSomethingHappend] = useState(true);
 
   const { data: users = [] } = useQuery({
@@ -19,6 +22,15 @@ const AllUsers = () => {
       return res.data;
     },
   });
+
+  const adminFilter = users?.filter(
+    (user) =>
+    userDetails.email === user?.email
+  );
+
+  const adminRoleFound = adminFilter[0]?.role === "admin" ? true : false;
+  
+
 
   // Function to handle user deletion
   const handleDelete = (Id) => {
@@ -66,7 +78,6 @@ const AllUsers = () => {
       });
   };
 
-
   //Handle Block button
   const handleMVol = (user) => {
     const newUserInfo = {
@@ -84,13 +95,12 @@ const AllUsers = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.modifiedCount > 0) {
-          swal("User Role Updated!", "Now You are Admin!", "success");
+          swal("User Role Updated!", "Now You are volunteer!", "success");
           setSomethingHappend(!somethingHappend);
           navigate("/dashboard/allUsers");
         }
       });
   };
-
 
   //Handle MDonor button
   const handleMDonor = (user) => {
@@ -109,13 +119,13 @@ const AllUsers = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.modifiedCount > 0) {
-          swal("User Role Updated!", "Now You are Admin!", "success");
+          swal("User Role Updated!", "Now You are Donor!", "success");
           setSomethingHappend(!somethingHappend);
           navigate("/dashboard/allUsers");
         }
       });
   };
-    //Handle Block button
+  //Handle Block button
   const handleBlock = (user) => {
     const newUserInfo = {
       status: "block",
@@ -132,15 +142,14 @@ const AllUsers = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.modifiedCount > 0) {
-          swal("User Role Updated!", "Now You are Admin!", "success");
+          swal("Status Blocked!", "User is now blocked!", "success");
           setSomethingHappend(!somethingHappend);
           navigate("/dashboard/allUsers");
         }
       });
   };
 
-
-    //Handle Active button
+  //Handle Active button
   const handleActive = (user) => {
     const newUserInfo = {
       status: "active",
@@ -157,7 +166,7 @@ const AllUsers = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.modifiedCount > 0) {
-          swal("User Role Updated!", "Now You are Admin!", "success");
+          swal("Status Active!", "User is now Active!", "success");
           setSomethingHappend(!somethingHappend);
           navigate("/dashboard/allUsers");
         }
@@ -267,36 +276,42 @@ const AllUsers = () => {
                       >
                         <FaEdit />
                       </a>
-                      <div className="dropdown dropdown-bottom dropdown-end">
-                        <div tabIndex={0} role="button" className=" m-1">
-                          <BsThreeDotsVertical />
-                        </div>
-                        <ul
-                          tabIndex={0}
-                          className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
-                        >
-                          <li>
-                            <a onClick={() => handleMAdmin(user)}>Make Admin</a>
-                          </li>
-                          
-                          <li>
-                            <a onClick={() => handleMVol(user)}>
-                              Make Volunteer
-                            </a>
-                          </li>
-                          <li>
-                            <a onClick={() => handleMDonor(user)}>Make Donor</a>
-                          </li>
-                          <li>
-                            <a onClick={() => handleBlock(user)}>Block</a>
-                          </li>
-                          <li>
-                            <a onClick={() => handleActive(user)}>
-                              Active
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
+
+                      {adminRoleFound ? (
+                        <>
+                          <div className="dropdown dropdown-bottom dropdown-end">
+                            <div tabIndex={0} role="button" className=" m-1">
+                              <BsThreeDotsVertical />
+                            </div>
+                            <ul
+                              tabIndex={0}
+                              className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+                            >
+                              <li>
+                                <a onClick={() => handleMAdmin(user)}>
+                                  Make Admin
+                                </a>
+                              </li>
+                              <li>
+                                <a onClick={() => handleMVol(user)}>
+                                  Make Volunteer
+                                </a>
+                              </li>
+                              <li>
+                                <a onClick={() => handleMDonor(user)}>
+                                  Make Donor
+                                </a>
+                              </li>
+                              <li>
+                                <a onClick={() => handleBlock(user)}>Block</a>
+                              </li>
+                              <li>
+                                <a onClick={() => handleActive(user)}>Active</a>
+                              </li>
+                            </ul>
+                          </div>
+                        </>
+                      ) : null}
                     </div>
                   </td>
                 </tr>

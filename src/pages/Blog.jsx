@@ -92,9 +92,7 @@ const Blog = () => {
                   <h2 className="card-title my-2 text-black">
                     {blog.blog_title}
                   </h2>
-                  <p className="text-gray-400 text-left text-sm">
-                    Category: {blog.blog_category}
-                  </p>
+                  
                   <p className="text-gray-500 pt-2 text-justify">
                     {blog.blog_description}
                   </p>
