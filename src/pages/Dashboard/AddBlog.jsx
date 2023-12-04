@@ -20,9 +20,10 @@ const AddBlog = () => {
     };
 
     const form = event.target;
-    const blogTitle = form.title.value;
-    const longDescription = form.longDescription.value;
-    const image = form.image.value;
+    const blog_title = form.blog_title.value;
+    const blog_description = form.blog_description.value;
+    const blog_img
+    = form.blog_img.value;
     const userEmail = userDetails.email;
     const blogPostDateTime = new Date().toLocaleString("en-US", options);
     const submitTime = Math.floor(Date.now() / 1000); //Time in seconds
@@ -30,9 +31,9 @@ const AddBlog = () => {
     const userImage = userDetails.photoURL
 
     const newBlog = {
-      blogTitle,
-      longDescription,
-      image,
+      blog_title,
+      blog_description,
+      blog_img,
       userEmail,
       submitTime,
       blogPostDateTime,
@@ -85,7 +86,7 @@ const AddBlog = () => {
                 <input
                   type="text"
                   placeholder="Enter blog title..."
-                  name="title"
+                  name="blog_title"
                   className="input input-bordered bg-white w-full rounded-md"
                   required
                 />
@@ -102,7 +103,7 @@ const AddBlog = () => {
                 <input
                   type="text"
                   placeholder="Enter blog image..."
-                  name="image"
+                  name="blog_img"
                   className="input input-bordered bg-white w-full rounded-md"
                   required
                 />
@@ -122,7 +123,7 @@ const AddBlog = () => {
                 <textarea
                   type="text"
                   placeholder="Enter long description..."
-                  name="longDescription"
+                  name="blog_description"
                   className="input rounded-md bg-white input-bordered resize-y h-28 w-full"
                 ></textarea>
               </label>

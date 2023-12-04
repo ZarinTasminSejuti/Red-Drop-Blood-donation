@@ -13,7 +13,7 @@ const Banner = () => {
           Share Life Through Blood Donation
         </p>
 
-        <div className=" flex justify-around w-1/2  mx-auto">
+        <div className=" flex gap-4 w-1/2 justify-center mx-auto">
           {userDetails ? (
             <>
               <Link to="/">

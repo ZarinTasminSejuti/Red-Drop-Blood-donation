@@ -81,9 +81,15 @@ const Dashboard = () => {
               </li>
 
               <li onClick={() => setChangeDashLayout(true)}>
-                <NavLink to="/dashboard/all-blood-donation-request">
+                <NavLink to="/dashboard/createDonation">
                   <BiSolidDonateHeart />
-                  Donation Requests
+                 Create Donation Requests
+                </NavLink>
+                </li>
+                <li onClick={() => setChangeDashLayout(true)}>
+                <NavLink to="/dashboard/my-donation-requests">
+                  <BiSolidDonateHeart />
+                 My Donation Requests
                 </NavLink>
               </li>
             </>

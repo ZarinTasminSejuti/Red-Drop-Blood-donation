@@ -8,7 +8,10 @@ import AdminHome from "../pages/Dashboard/AdminHome";
 import AllUsers from "../pages/Dashboard/All Users/AllUsers";
 import ContentManagement from "../pages/Dashboard/ContentManagement";
 import DonorHome from "../pages/Dashboard/DonorHome";
+import MyDonation from "../pages/Dashboard/MyDonation";
 import VolunteerHome from "../pages/Dashboard/VolunteerHome";
+import DonationDetails from "../pages/DonationDetails";
+import ErrorPage from "../pages/ErrorPage";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Registration from "../pages/Registration";
@@ -21,6 +24,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
@@ -30,10 +34,17 @@ const router = createBrowserRouter([
         path: "/createDonation",
         element: <CreateDonation></CreateDonation>,
         
+        
       },
       {
         path: "/login",
         element: <Login></Login>,
+      },
+      {
+        path: "/donationDetails",
+        element: <DonationDetails></DonationDetails>,
+        loader: () => fetch("http://localhost:5000/CreateDonation")
+        
       },
       {
         path: "/registration",
@@ -62,6 +73,11 @@ const router = createBrowserRouter([
         element: <ContentManagement></ContentManagement>,
       },
       {
+        path: "createDonation",
+        element: <CreateDonation></CreateDonation>,
+        
+      },
+      {
         path: "contentManagement/addBlog",
         element: <AddBlog></AddBlog>,
       },
@@ -82,7 +98,12 @@ const router = createBrowserRouter([
         path: "volunteerHome",
         element: <VolunteerHome></VolunteerHome>,
       },
-      
+      {
+        path: "my-donation-requests",
+        element: <MyDonation></MyDonation>,
+        loader: () => fetch("http://localhost:5000/CreateDonation"),
+      },
+     
      
     ],
   },
