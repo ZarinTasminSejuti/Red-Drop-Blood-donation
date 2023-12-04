@@ -82,7 +82,7 @@ const CreateDonation = () => {
     };
 
     //send data to the server
-    fetch("http://localhost:5000/CreateDonation", {
+    fetch("https://red-drop-server-two.vercel.app/CreateDonation", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

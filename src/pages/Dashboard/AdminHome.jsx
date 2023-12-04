@@ -26,7 +26,7 @@ const AdminHome = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/CreateDonation");
+        const response = await fetch("https://red-drop-server-two.vercel.app/CreateDonation");
         const data = await response.json();
         setAllData(data);
        

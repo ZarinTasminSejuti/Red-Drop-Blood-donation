@@ -36,7 +36,7 @@ const AdminAllDonationRequest = () => {
   // Function to handle user deletion
   const handleDelete = (Id) => {
     console.log(Id);
-    fetch(`http://localhost:5000/deleteDonationData/${Id}`, {
+    fetch(`https://red-drop-server-two.vercel.app/deleteDonationData/${Id}`, {
       method: "DELETE",
       headers: {
         "content-Type": "application/json",

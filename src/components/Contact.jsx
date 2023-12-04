@@ -16,7 +16,7 @@ const Contact = () => {
     };
 
     //send data to the server
-    fetch("http://localhost:5000/contact", {
+    fetch("https://red-drop-server-two.vercel.app/contact", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

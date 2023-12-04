@@ -45,7 +45,7 @@ const router = createBrowserRouter([
       {
         path: "/donationDetails",
         element: <DonationDetails></DonationDetails>,
-        loader: () => fetch("http://localhost:5000/CreateDonation")
+        loader: () => fetch("https://red-drop-server-two.vercel.app/CreateDonation")
         
       },
       {
@@ -55,7 +55,7 @@ const router = createBrowserRouter([
       {
         path: "/blog",
         element: <Blog></Blog>,
-        loader: () => fetch("http://localhost:5000/blog"),
+        loader: () => fetch("https://red-drop-server-two.vercel.app/blog"),
       },
      
     ],
@@ -91,7 +91,7 @@ const router = createBrowserRouter([
       {
         path: "all-blood-donation-request",
         element: <AdminAllDonationRequest></AdminAllDonationRequest>,
-        loader: () => fetch("http://localhost:5000/CreateDonation")
+        loader: () => fetch("https://red-drop-server-two.vercel.app/CreateDonation")
       },
 
 
@@ -109,7 +109,7 @@ const router = createBrowserRouter([
       {
         path: "my-donation-requests",
         element: <MyDonation></MyDonation>,
-        loader: () => fetch("http://localhost:5000/CreateDonation"),
+        loader: () => fetch("https://red-drop-server-two.vercel.app/CreateDonation"),
       },
      
      

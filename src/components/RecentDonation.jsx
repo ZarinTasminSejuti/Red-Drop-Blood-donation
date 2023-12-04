@@ -23,7 +23,7 @@ const { userDetails } = useContext(AuthContext);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/CreateDonation");
+        const response = await fetch("https://red-drop-server-two.vercel.app/CreateDonation");
         const data = await response.json();
         setRecentData(data);
        
@@ -48,7 +48,7 @@ console.log(slicedData.length);
    // Function to handle user deletion
    const handleDelete = (Id) => {
     console.log(Id);
-    fetch(`http://localhost:5000/deleteDonationData/${Id}`, {
+    fetch(`https://red-drop-server-two.vercel.app/deleteDonationData/${Id}`, {
       method: "DELETE",
       headers: {
         "content-Type": "application/json",

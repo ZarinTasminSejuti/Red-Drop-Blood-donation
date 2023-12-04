@@ -42,7 +42,7 @@ const AddBlog = () => {
     };
 
     //send data to the server
-    fetch("http://localhost:5000/addBlog", {
+    fetch("https://red-drop-server-two.vercel.app/addBlog", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

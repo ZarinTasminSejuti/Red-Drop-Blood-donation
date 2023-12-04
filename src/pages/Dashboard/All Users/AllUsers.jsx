@@ -35,7 +35,7 @@ const AllUsers = () => {
   // Function to handle user deletion
   const handleDelete = (Id) => {
     console.log(Id);
-    fetch(`http://localhost:5000/allUsers/${Id}`, {
+    fetch(`https://red-drop-server-two.vercel.app/allUsers/${Id}`, {
       method: "DELETE",
       headers: {
         "content-Type": "application/json",
@@ -61,7 +61,7 @@ const AllUsers = () => {
       role: "admin",
     };
 
-    fetch(`http://localhost:5000/updateUserInfo/${user._id}`, {
+    fetch(`https://red-drop-server-two.vercel.app/updateUserInfo/${user._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -85,7 +85,7 @@ const AllUsers = () => {
       role: "volunteer",
     };
 
-    fetch(`http://localhost:5000/updateUserInfo/${user._id}`, {
+    fetch(`https://red-drop-server-two.vercel.app/updateUserInfo/${user._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -109,7 +109,7 @@ const AllUsers = () => {
       role: "donor",
     };
 
-    fetch(`http://localhost:5000/updateUserInfo/${user._id}`, {
+    fetch(`https://red-drop-server-two.vercel.app/updateUserInfo/${user._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -132,7 +132,7 @@ const AllUsers = () => {
       role: user.role,
     };
 
-    fetch(`http://localhost:5000/updateUserInfo/${user._id}`, {
+    fetch(`https://red-drop-server-two.vercel.app/updateUserInfo/${user._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -156,7 +156,7 @@ const AllUsers = () => {
       role: user.role,
     };
 
-    fetch(`http://localhost:5000/updateUserInfo/${user._id}`, {
+    fetch(`https://red-drop-server-two.vercel.app/updateUserInfo/${user._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

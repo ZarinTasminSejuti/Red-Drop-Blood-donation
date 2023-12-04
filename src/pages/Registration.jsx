@@ -14,10 +14,10 @@ const Register = () => {
     const fetchData = async () => {
       try {
         const [districtResponse, upazilaResponse] = await Promise.all([
-          fetch("http://localhost:5000/district").then((response) =>
+          fetch("https://red-drop-server-two.vercel.app/district").then((response) =>
             response.json()
           ),
-          fetch("http://localhost:5000/upazila").then((response) =>
+          fetch("https://red-drop-server-two.vercel.app/upazila").then((response) =>
             response.json()
           ),
         ]);
