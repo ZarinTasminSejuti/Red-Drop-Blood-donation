@@ -67,8 +67,8 @@ const Login = () => {
 };
 
   return (
-    <div className="my-20 min-h-screen">
-      <div className="text-center">
+    <div>
+   <div className="max-w-screen-xl mx-auto pt-36 text-center">
         <h1 className="text-5xl text-blue-600 font-bold">Login now!</h1>
         <p className="py-2 my-4 text-black font-medium px-4 rounded-xl">
           Please log in to access your account and explore our donation services.

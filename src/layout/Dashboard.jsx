@@ -1,8 +1,8 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { FaHome, FaMicroblog, FaUsers } from "react-icons/fa";
 import { BiSolidDonateHeart } from "react-icons/bi";
 import { MdOutlineContentPaste } from "react-icons/md";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import { useQuery } from "react-query";
@@ -13,7 +13,10 @@ import VolunteerHome from "../pages/Dashboard/VolunteerHome";
 
 const Dashboard = () => {
   const { userDetails } = useContext(AuthContext);
-  const [changeDashLayout, setChangeDashLayout] = useState(null);
+  
+  const location = useLocation();
+
+  const noProfile = location.pathname === '/dashboard';
 
   const axiosSecure = useAxiosSecure();
 
@@ -45,27 +48,27 @@ const Dashboard = () => {
         <ul className="menu font-medium text-lg space-y-3">
           {roleFound === "admin" ? (
             <>
-              <li onClick={() => setChangeDashLayout(false)}>
+              <li >
                 <NavLink to="/dashboard">
                   <FaHome></FaHome>Admin Home
                 </NavLink>
               </li>
 
-              <li onClick={() => setChangeDashLayout(true)}>
+              <li >
                 <NavLink to="/dashboard/allUsers">
                   <FaUsers />
                   All Users
                 </NavLink>
               </li>
 
-              <li onClick={() => setChangeDashLayout(true)}>
+              <li >
                 <NavLink to="/dashboard/all-blood-donation-request">
                   <BiSolidDonateHeart />
-                  Donation Requests
+                  All Donation Requests
                 </NavLink>
               </li>
 
-              <li onClick={() => setChangeDashLayout(true)}>
+              <li >
                 <NavLink to="/dashboard/contentManagement">
                   <MdOutlineContentPaste />
                   Content Management
@@ -74,19 +77,19 @@ const Dashboard = () => {
             </>
           ) : roleFound === "donor" ? (
             <>
-              <li onClick={() => setChangeDashLayout(false)}>
+                <li>
                 <NavLink to="/dashboard">
                   <FaHome></FaHome>Donor Home
                 </NavLink>
               </li>
 
-              <li onClick={() => setChangeDashLayout(true)}>
+              <li >
                 <NavLink to="/dashboard/createDonation">
                   <BiSolidDonateHeart />
                  Create Donation Requests
                 </NavLink>
                 </li>
-                <li onClick={() => setChangeDashLayout(true)}>
+                <li >
                 <NavLink to="/dashboard/my-donation-requests">
                   <BiSolidDonateHeart />
                  My Donation Requests
@@ -95,13 +98,13 @@ const Dashboard = () => {
             </>
           ) : (
             <>
-              <li onClick={() => setChangeDashLayout(false)}>
+              <li >
                 <NavLink to="/dashboard">
                   <FaHome></FaHome>Volunteer Home
                 </NavLink>
               </li>
 
-              <li onClick={() => setChangeDashLayout(true)}>
+              <li >
                 <NavLink to="/dashboard/all-blood-donation-request">
                   <BiSolidDonateHeart />
                   Donation Requests
@@ -129,17 +132,19 @@ const Dashboard = () => {
       </div>
 
       <div className="flex-1 bg-slate-100 pt-32 p-14">
-        {roleFound === "admin" && changeDashLayout === null &&  changeDashLayout === false ? (
+        {roleFound === "admin"  ? (
           <>
-            <AdminHome></AdminHome>
+            { noProfile && <AdminHome></AdminHome>}
+            
           </>
-        ) : roleFound === "donor" && changeDashLayout === null &&  changeDashLayout === false ? (
+        ) : roleFound === "donor"  ? (
           <>
-            <DonorHome></DonorHome>
+              { noProfile && <DonorHome></DonorHome>}
           </>
-        ) : roleFound === "volunteer" && changeDashLayout === null &&  changeDashLayout === false ? (
-          <>
-            <VolunteerHome></VolunteerHome>
+        ) : roleFound === "volunteer" ? (
+              <>
+                { noProfile &&  <VolunteerHome></VolunteerHome>}
+       
           </>
         ) : null}
 

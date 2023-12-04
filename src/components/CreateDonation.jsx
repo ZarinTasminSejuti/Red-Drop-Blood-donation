@@ -50,27 +50,22 @@ const CreateDonation = () => {
 
   // Event handler for form submission
   const submitForm = (event) => {
-    const options = {
-      year: "numeric",
-      month: "short",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-    };
+    
     event.preventDefault();
 
     const form = event.target;
-  const requesterName = form.requesterName?.value || "";
-  const requesterEmail = form.requesterEmail?.value || "";
-  const recipientName = form.recipientName?.value || "";
-  const recipientDistrict = form.recipientDistrict?.value || "";
-  const recipientUpazila = form.recipientUpazila?.value || "";
-  const hospitalName = form.hospitalName?.value || "";
-  const fullAddress = form.fullAddress?.value || "";
-  const donationDate = new Date().toLocaleString("en-US", options);
-  const donationTime = form.donationTime?.value || "";
-  const requestMessage = form.requestMessage?.value || "";
-    // setFormData(Object.fromEntries(initialFormData.map((field) => [field.name, ''])));
+  const requesterName = userDetails?.displayName;
+  const requesterEmail = userDetails?.email;
+  const recipientName = form.recipientName?.value;
+  const recipientDistrict = form.recipientDistrict?.value;
+  const recipientUpazila = form.recipientUpazila?.value;
+  const hospitalName = form.hospitalName?.value;
+  const fullAddress = form.fullAddress?.value;
+  const donationDate = form.donationDate?.value;
+  const donationTime = form.donationTime?.value;
+    const requestMessage = form.requestMessage?.value;
+    const submitTime = Math.floor(Date.now() / 1000); //Time in seconds
+  
 
     const createNewDonationRequest = {
       requesterName,
@@ -83,6 +78,7 @@ const CreateDonation = () => {
       donationDate,
       donationTime,
       requestMessage,
+      submitTime
     };
 
     //send data to the server

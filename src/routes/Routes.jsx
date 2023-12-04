@@ -1,9 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import CreateDonation from "../components/CreateDonation";
+
 import Dashboard from "../layout/Dashboard";
 import MainLayout from "../layout/MainLayout";
 import Blog from "../pages/Blog";
 import AddBlog from "../pages/Dashboard/AddBlog";
+import AdminAllDonationRequest from "../pages/Dashboard/AdminAllDonationRequest";
 import AdminHome from "../pages/Dashboard/AdminHome";
 import AllUsers from "../pages/Dashboard/All Users/AllUsers";
 import ContentManagement from "../pages/Dashboard/ContentManagement";
@@ -86,6 +88,11 @@ const router = createBrowserRouter([
         element: <AllUsers></AllUsers>,
   
       },
+      {
+        path: "all-blood-donation-request",
+        element: <AdminAllDonationRequest></AdminAllDonationRequest>,
+        loader: () => fetch("http://localhost:5000/CreateDonation")
+      },
 
 
       //Donor Routes
@@ -98,6 +105,7 @@ const router = createBrowserRouter([
         path: "volunteerHome",
         element: <VolunteerHome></VolunteerHome>,
       },
+      
       {
         path: "my-donation-requests",
         element: <MyDonation></MyDonation>,

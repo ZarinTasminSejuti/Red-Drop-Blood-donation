@@ -98,12 +98,12 @@ const Navbar = () => {
        {user ? (
          <>
            <img
-             src={userDetails.photoURL}
-             alt={userDetails.displayName}
+             src={userDetails?.photoURL}
+             alt={userDetails?.displayName}
              className="w-10 rounded "
            />
 
-           <span className="text-white">{userDetails.displayName}</span>
+           <span className="text-white">{userDetails?.displayName}</span>
            <button
              className="btn btn-ghost text-white hover:text-white hover:bg-red-600"
              onClick={handleLogOut}

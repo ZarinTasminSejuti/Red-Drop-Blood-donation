@@ -107,9 +107,11 @@ const Register = () => {
 
   return (
     <div>
-      <div className="my-20 min-h-screen">
-        <div className="text-center">
-          <h1 className="text-4xl mt-16 text-blue-600 font-bold">
+      
+   
+     
+        <div className="max-w-screen-xl mx-auto pt-36 text-center">
+          <h1 className="text-4xl text-blue-600 font-bold">
             Create a new account
           </h1>
           <p className="py-5">Enter your information to setup a new account</p>
@@ -255,8 +257,8 @@ const Register = () => {
             </Link>
           </p>
         </div>
-      </div>
-    </div>
+       </div>
+     
   );
 };
 
